@@ -8,7 +8,7 @@ import (
     "os"
 
     "github.com/Krokin/PinBox/pkg/models/mysql"
-     
+
     _"github.com/go-sql-driver/mysql"
 )
 

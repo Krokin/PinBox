@@ -3,7 +3,6 @@ package mysql
 import (
 	"database/sql"
 	"errors"
-	"fmt"
 
 	"github.com/Krokin/PinBox/pkg/models"
 )
@@ -13,7 +12,6 @@ type PinModel struct {
 }
 
 func (p *PinModel) Insert(title, content, expires string) (int, error) {
-	fmt.Print(title, content, expires)
 	stmt := `INSERT INTO pins (title, content, created, expires)
     VALUES(?, ?, UTC_TIMESTAMP(), DATE_ADD(UTC_TIMESTAMP(), INTERVAL ? DAY))`
 	result, err := p.DB.Exec(stmt, title, content, expires)
@@ -24,7 +22,6 @@ func (p *PinModel) Insert(title, content, expires string) (int, error) {
 	if err != nil {
 		return 0, err
 	}
-
 	return int(id), nil
 }
 
@@ -44,9 +41,8 @@ func (p *PinModel) Get(id int) (*models.Pin, error) {
 	return pin, nil
 }
 
-func (p *PinModel) Latest() ([]*models.Pin, error) {
-	stmt := `SELECT id, title, content, created, expires FROM pins
-    WHERE expires > UTC_TIMESTAMP() ORDER BY created DESC LIMIT 10`
+func (p *PinModel) ShowAll() ([]*models.Pin, error) {
+	stmt := `SELECT * FROM pins WHERE expires > UTC_TIMESTAMP()`
 	rows, err := p.DB.Query(stmt)
 	if err != nil {
 		return nil, err

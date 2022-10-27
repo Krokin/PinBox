@@ -23,7 +23,7 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
         app.notFound(w)
         return
     }
-    p, err := app.pins.Latest()
+    p, err := app.pins.ShowAll()
     if err != nil {
         app.serverError(w, err)
         return
