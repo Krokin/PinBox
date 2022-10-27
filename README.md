@@ -1,6 +1,6 @@
 # PinBox
 
-Web application for creating and storing temporary notes
+Web application for creating and storing temporary notes.
  
     POST /create - Creates a note with the specified title and text and enters it into the database.
     GET /pin/{id} - Returns a note with the specified id.
